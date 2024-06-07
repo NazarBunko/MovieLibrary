@@ -1,0 +1,248 @@
+@startuml
+class Main {
+    +window: Window
+}
+
+class Film{
+    +NameOfFilm: String
+    +NameOfDirector: String
+    +Year: int
+    +Actors: String[]
+    +NumberOfActors: int
+    +Budget: int
+    +Country: String
+    +DurationMin: int
+    +getNameOfFilm(): String
+    +getNameOfDirector(): String
+    +getYear(): int
+    +getActors(): String[]
+    +getNumberOfActors(): int
+    +getBudgetString(): String
+    +getBudget(): int
+    +getCountry(): String
+    +getDurationMin(): int
+    +setNameOfFilm(String): void
+    +setNameOfDirector(String): void
+    +setYear(int): void
+    +setActors(String[]): void
+    +setNumberOfActors(int): void
+    +setBudget(int): void
+    +setCountry(String): void
+    +setDurationMin(int): void
+    +Film()
+    +Film(String, String, int, String[], int, String, int)
+    +Film(Film)
+    +SetFilm(String, String, int, String[], int, String, int, int): void
+}
+
+class Window {
+    +NumberOfFilms: int
+    +film: ArrayList<Film>
+    +fc: FileChooser
+    +name_field: JTextField
+    +director_field: JTextField
+    +country_field: JTextField
+    +actor_field: JTextField
+    +container: Container
+    +deleteFilmLabel: JLabel
+    +deleteFilmButton: JButton
+    +checkActors: JButton
+    +addFilmButton: JButton
+    +readFromFile: JButton
+    +writeToFile: JButton
+    +allFilmDeleteButton: JButton
+    +countrySort: JButton
+    +searchDirectorBudgetLabel: JLabel
+    +directorsMinBudget: JButton
+    +searchCountryLabel: JLabel
+    +searchCountryButton: JButton
+    +directorDurationSortButton: JButton
+    +searchBudgetYearButton: JButton
+    +searchActorLabel: JLabel
+    +searchActorFilmButton: JButton
+    +searchActorButton: JButton
+    +columnsNames: String[]
+    +data: Object[][]
+    +list: JTable
+    +scrollPanel: JScrollPane
+    +empty: JLabel
+    +addToContainer(JComponent, int, int, int, int): void
+    +createList(Film): void
+}
+
+class ButtonCountrySort{
+    +n: int
+    +minIndex: int
+    +country1: String
+    +country2: String
+    +temp: Film
+    +dispose(): void
+    +window: Window
+}
+
+class ButtonShowDirectorsMinBudget{
+    +mostPopularDirector: String
+    +budgets: ArrayList<Integer>
+    +newFilm: ArrayList<Film>
+    +str: StringBuilder
+    +minBudget: int
+    +min: int
+    +findMinNumber(ArrayList<Integer>): int
+}
+
+class ButtonCountryMaxBudgetMinDuration{
+    +newFilm: ArrayList<Film>
+    +newNewFilm: ArrayList<Film>
+    +maxBudget: int
+    +minDuration: int
+    +newNewNewFilm: ArrayList<Film>
+    +str: StringBuilder
+    +newFilm: ArrayList<Film>
+    +list: ShowList
+}
+
+class ShowList{
+    +container: Container
+    +columnsNames: String[]
+    +NumberOfFilms: int
+    +data: Object[][]
+    +list: JTable
+    +scrollPanel: JScrollPane
+    +buttonAddActors: JButton
+    +empty: JLabel
+}
+
+class Button{}
+
+class ButtonDirectorDurationShow{
+    +longestFilmsByDirector: Map<String, Film>
+    +director: String
+    +duration: int
+}
+
+class ButtonBudgetYearsShow{
+    +newFilm: ArrayList<Film>
+    +budget: int
+    +year: int
+    +str: StringBuilder
+}
+
+class ButtonActorFilmShow{
+    +actor: String
+    +str: StringBuilder
+}
+
+class ButtonPopularActorShow{
+    +number: int
+    +string: String[]
+    +stringCounts: Map<String, Integer>
+    +mostPopularActor: String
+    +maxCount: int
+}
+
+class ButtonReadFile{
+    +file: File
+    +bufferedReader: BufferedReader
+    +NumberOfFilms: int
+    +fileData: ArrayList<String>
+    +test: String
+    +NumberOfActors: int
+    +Actor: String[]
+    +newActors: String[]
+    +Year: int
+    +Budget: int
+    +DurationMin: int
+    +TestFilm: Film
+    +dispose(): void
+    +window: Window
+}
+
+class ButtonWriteFile{
+    +file: File
+    +writer: BufferedWriter
+}
+
+class ButtonCheckActors{
+    +film1: Film
+    +str: StringBuilder
+}
+
+class ButtonAddFilm{
+    +newFilm: AddFilm
+    +dispose(): void
+}
+
+class AddFilm{
+    +filmName: String
+    +filmDirector: String
+    +filmYear: int
+    +filmCountry: String
+    +filmBudget: int
+    +filmDuration: int
+    +name_field: JTextField
+    +director_field: JTextField
+    +year_field: JTextField
+    +country_field: JTextField
+    +budget_field: JTextField
+    +duration_field: JTextField
+    +actors_field: JTextField
+    +actorsChar: char[]
+    +filmActors: String[]
+    +NumberOfActors: int
+    +container: Container
+    +name: JLabel
+    +director: JLabel
+    +year: JLabel
+    +budget: JLabel
+    +country: JLabel
+    +duration: JLabel
+    +actor: JLabel
+    +buttonAddActors: JButton
+    +empty: JLabel
+}
+
+class ButtonNewFilm{
+    +film: Film
+    +dispose(): void
+    +window: Window
+}
+
+class ButtonDeleteFilm{
+    +number: int
+    +film1: ArrayList<Film>
+    +dispose(): void
+    +window: Window
+}
+
+class ButtonDeleteAllFilms{
+    +dispose(): void
+    +window: Window
+}
+
+
+
+Main .up.|> Window
+Window -- ButtonCountrySort
+ButtonCountrySort .up.|> Window
+Window -- ButtonShowDirectorsMinBudget
+Window -- ButtonCountryMaxBudgetMinDuration
+Window -- ButtonDirectorDurationShow
+ButtonDirectorDurationShow .up.|> ShowList
+ShowList -- Button
+Button .up.|> Window
+Window -- ButtonBudgetYearsShow
+Window -- ButtonActorFilmShow
+Window -- ButtonPopularActorShow
+Window -- ButtonReadFile
+ButtonReadFile .up.|> Window
+Window -- ButtonWriteFile
+Window -- ButtonCheckActors
+Window -- ButtonAddFilm
+ButtonAddFilm .up.|> AddFilm
+AddFilm -- ButtonNewFilm
+ButtonNewFilm -- Window
+Window -- ButtonDeleteFilm
+ButtonDeleteFilm .up.|> Window
+Window -- ButtonDeleteAllFilms
+ButtonDeleteAllFilms .up.|> Window
+@enduml
